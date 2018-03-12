@@ -1,0 +1,45 @@
+# Seaborn common parameters
+# .15 = dark_gray
+# .8 = light_gray
+figure.figsize: 8.0, 5.5
+figure.facecolor: white
+savefig.dpi: 120
+savefig.bbox: tight
+
+
+font.size: 16.0
+axes.labelsize: 20
+axes.titlesize: 24
+xtick.labelsize: 14
+ytick.labelsize: 14
+legend.fontsize: 16
+# legend.title: 14
+font.family: sans-serif
+font.sans-serif: Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
+mathtext.fontset: cm
+
+text.color: .15
+axes.labelcolor: .15
+legend.frameon: False
+legend.numpoints: 1
+legend.scatterpoints: 1
+xtick.direction: out
+ytick.direction: out
+xtick.color: .15
+ytick.color: .15
+axes.axisbelow: True
+image.cmap: Greys
+grid.linestyle: -
+lines.solid_capstyle: round
+lines.linewidth: 2
+
+# Seaborn darkgrid parameters
+axes.grid: True
+axes.facecolor: EAEAF2
+axes.edgecolor: white
+axes.linewidth: 0
+grid.color: white
+xtick.major.size: 0
+ytick.major.size: 0
+xtick.minor.size: 0
+ytick.minor.size: 0
