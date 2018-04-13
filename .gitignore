@@ -1,3 +1,4 @@
 preprocessed/
 raw/
 .ipynb_checkpoints
+*.pem
