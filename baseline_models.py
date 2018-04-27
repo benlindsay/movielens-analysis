@@ -102,17 +102,17 @@ class DampedUserMovieBaselineModel():
 
     Attributes
     ----------
-    mu_ : float
+    mu : float
         Average rating over all training samples
-    b_u_ : pandas Series, shape = [n_users]
+    b_u : pandas Series, shape = [n_users]
         User residuals
-    b_i_ : pandas Series, shape = [n_movies]
+    b_i : pandas Series, shape = [n_movies]
         Movie residuals
-    damping_factor_ : float, default=0
+    damping_factor : float, default=0
         Factor to bring residuals closer to 0. Must be positive.
     """
     def __init__(self, damping_factor=0):
-        self.damping_factor_ = damping_factor
+        self.damping_factor = damping_factor
 
     def fit(self, X, y):
         """Fit training data.
@@ -130,28 +130,28 @@ class DampedUserMovieBaselineModel():
         """
         X = X.copy()
         X['rating'] = y
-        self.mu_ = np.mean(y)
+        self.mu = np.mean(y)
         user_counts = X['userId'].value_counts()
         movie_counts = X['movieId'].value_counts()
         b_u = (
             X[['userId', 'rating']]
             .groupby('userId')['rating']
             .sum()
-            .subtract(user_counts * self.mu_)
-            .divide(user_counts + self.damping_factor_)
+            .subtract(user_counts * self.mu)
+            .divide(user_counts + self.damping_factor)
             .rename('b_u')
         )
         X = X.join(b_u, on='userId')
-        X['movie_residual'] = X['rating'] - X['b_u'] - self.mu_
+        X['movie_residual'] = X['rating'] - X['b_u'] - self.mu
         b_i = (
             X[['movieId', 'movie_residual']]
             .groupby('movieId')['movie_residual']
             .sum()
-            .divide(movie_counts + self.damping_factor_)
+            .divide(movie_counts + self.damping_factor)
             .rename('b_i')
         )
-        self.b_u_ = b_u
-        self.b_i_ = b_i
+        self.b_u = b_u
+        self.b_i = b_i
         return self
 
     def predict(self, X):
@@ -168,6 +168,6 @@ class DampedUserMovieBaselineModel():
             Array of n_samples rating predictions
         """
         X = X.copy()
-        X = X.join(self.b_u_, on='userId').fillna(0)
-        X = X.join(self.b_i_, on='movieId').fillna(0)
-        return self.mu_ + X['b_u'] + X['b_i']
+        X = X.join(self.b_u, on='userId').fillna(0)
+        X = X.join(self.b_i, on='movieId').fillna(0)
+        return self.mu + X['b_u'] + X['b_i']
