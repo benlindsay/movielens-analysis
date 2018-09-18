@@ -81,7 +81,7 @@ class AverageByIdModel():
             .mean()
             .rename('average_rating')
         )
-        self.overall_average = np.mean(y)
+        self.overall_average = X['rating'].mean()
         return self
 
     def predict(self, X):
