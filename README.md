@@ -8,3 +8,4 @@ This repo contains my analysis of the MovieLens 100K dataset with implementation
 4. [Alternating Least Squares (ALS)](04_ALS.ipynb)
 5. [Stochastic Gradient Descent (SGD)](05_SGD.ipynb)
 6. [Comparisons Between Models](06_Model-Comparisons.ipynb)
+7. [Recommender Notebook](07_Recommender.ipynb): This notebook lets you choose a user in system and get the top 3 recommendations for them using your choice of the best user-based, item-based, ALS, or SGD model.
